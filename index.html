@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time Genius - Home Page</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="home.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+    .navbar.bg-black {
+        background-color: #000000;
+    }
+
+    .navbar .nav-link,
+    .navbar .navbar-brand {
+        color: #FFFFFF !important;
+    }
+    .bg-black {
+        background-color: #000000 !important;
+    }
+
+    .text-white {
+        color: #FFFFFF !important;
+    }
+        /* Animation for the navbar brand */
+        .navbar-brand {
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        /* Animation for the navbar links */
+        .navbar-nav .nav-link {
+            transition: color 0.3s ease-in-out, transform 0.3s ease-in-out;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: #ffcc00; /* Change to your preferred hover color */
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-black fixed-top">
+    <a class="navbar-brand" href="index.html">
+        <img src="logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+        <b>TIME GENIUS</b>
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="index.html"><i class="fas fa-home"></i> Home </a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="about.html"><i class="fas fa-info-circle"></i> About </a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="main2.html"><i class="far fa-calendar-check"></i> Daily Scheduler </a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="main.html"><i class="fas fa-calendar-alt"></i> Weekly Scheduler </a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="task_management.html"><i class="fas fa-tasks"></i> Task Scheduler </a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="regandlog.html"><i class="fas fa-user"></i> Sign in / Sign up </a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+    <div class="container text-center mt-5 pt-5">
+        <h1 class="title animate__animated animate__fadeInDown">Welcome to Time Genius software</h1><br>
+        <p class="animate__animated animate__fadeInUp">Welcome to Time Genius, your ultimate companion in managing time effectively and achieving your goals effortlessly. Whether you're a student, professional, or anyone striving for better time management, Time Genius is designed to streamline your day, boost productivity, and bring focus to what matters most.</p>
+        <center><button onclick="window.location.href='getstart.html'" class="btn custom-button animate__animated animate__pulse animate__infinite">
+            <strong>GET START</strong>
+            <div id="container-stars">
+                <div id="stars"></div>
+            </div>
+            <div id="glow">
+                <div class="circle"></div>
+                <div class="circle"></div>
+            </div>
+        </button>
+    </div>
+
+    <div class="container mt-5">
+        <h2 class="subtitle animate__animated animate__fadeIn" style="font-family:Kanit">What is this software?</h2>
+        <p class="text-center animate__animated animate__fadeIn">This software was created by the coding club association of Gampaha Bandaranayake College, its narrow purpose is a time management software to allocate time for their educational work with the new world.</p>
+        <h5 class="text-center animate__animated animate__fadeIn"><b><a href="about.html"> You can find more details visit our about page</a></b></h5>
+</div>
+
+        <footer class="text-center bg-black text-white py-3 mt-5">
+        <b>&copy; 2024 Coding Club Bandaranayake College Gampaha</b>
+    </footer>
+
+    <!-- Bootstrap JS, Popper.js, and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Font Awesome JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.nav-link').forEach(anchor => {
+                anchor.addEventListener('click', function(event) {
+                    // Close the navbar collapse on click (for smaller screens)
+                    const navbarToggler = document.querySelector('.navbar-toggler');
+                    if (navbarToggler.getAttribute('aria-expanded') === 'true') {
+                        navbarToggler.click();
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

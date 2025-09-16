@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time Genius - Task Management</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Custom CSS for mobile display */
+        @media (max-width: 767px) {
+            .card-body {
+                padding: 1rem;
+            }
+
+            .table thead {
+                display: none;
+            }
+
+            .table tr {
+                display: block;
+                margin-bottom: 0.625rem;
+            }
+
+            .table td {
+                display: block;
+                text-align: right;
+                font-size: 0.8rem;
+                border-bottom: 1px solid #dee2e6;
+            }
+
+            .table td::before {
+                content: attr(data-label);
+                float: left;
+                text-transform: capitalize;
+                font-weight: bold;
+            }
+        }
+
+        .navbar.bg-black {
+            background-color: #000000;
+        }
+
+        .navbar .nav-link,
+        .navbar .navbar-brand {
+            color: #FFFFFF !important;
+        }
+
+        .bg-black {
+            background-color: #000000 !important;
+        }
+
+        .text-white {
+            color: #FFFFFF !important;
+        }
+
+        h2, p, ul, .card, table {
+            animation: slideIn 1s ease-in-out;
+        }
+
+        .container {
+            margin-top: 100px; /* Adjust according to your preference */
+        }
+
+        .card {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .card:hover {
+            transform: scale(1.02);
+        }
+
+        .form-control:focus {
+            border-color: #ffcc00;
+            box-shadow: 0 0 5px rgba(255, 204, 0, 0.8);
+        }
+
+        .btn-primary {
+            background-color: #000000;
+            border-color: #000000;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        .btn-primary:hover {
+            background-color: #ffcc00;
+            border-color: #ffcc00;
+        }
+
+        .progress-bar {
+            transition: width 0.3s ease-in-out;
+        }
+
+        .table-hover tbody tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        .table thead {
+            background-color: #000000;
+            color: #FFFFFF;
+        }
+
+        .table-responsive {
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-black fixed-top">
+        <a class="navbar-brand" href="index.html">
+            <img src="logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+            <b>TIME GENIUS</b>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="index.html"><i class="fas fa-home"></i> Home </a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="about.html"><i class="fas fa-info-circle"></i> About </a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="main2.html"><i class="far fa-calendar-check"></i> Daily Scheduler </a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="main.html"><i class="fas fa-calendar-alt"></i> Weekly Scheduler </a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="task_management.html"><i class="fas fa-tasks"></i> Task Scheduler </a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="regandlog.html"><i class="fas fa-user"></i> Sign in / Sign up </a>
+                </ul>
+        </div>
+    </nav>
+    <div class="container mt-5">
+        <div id="task_management" class="section active">
+            <h2>Task Management</h2>
+            <p>Our Time Management App offers a comprehensive task management feature designed to help kids stay organized and productive. Here are some of the key features:</p>
+            <ul>
+                <li><strong>Create, Edit, and Delete Tasks:</strong> Easily manage your tasks by adding new ones, modifying existing tasks, or removing completed or outdated tasks.</li>
+                <li><strong>Assign Deadlines and Due Dates:</strong> Set deadlines and due dates to ensure that tasks are completed on time.</li>
+                <li><strong>Set Priorities:</strong> Categorize tasks based on their importance with priority levels such as high, medium, and low.</li>
+                <li><strong>Categorize Tasks:</strong> Organize tasks into different categories such as school, chores, and extracurricular activities to keep everything in order.</li>
+                <li><strong>Customizable Reminders:</strong> Set reminders for upcoming tasks to ensure nothing is missed.</li>
+                <li><strong>Push Notifications:</strong> Receive notifications for due dates and important tasks.</li>
+                <li><strong>Recurring Reminders:</strong> Set up recurring reminders for tasks that happen regularly.</li>
+                <li><strong>Task Completion Tracking:</strong> Monitor your progress with visual indicators.</li>
+                <li><strong>Achievement Badges:</strong> Earn badges and rewards for completing tasks.</li>
+                <li><strong>Kid-Friendly Features:</strong> Gamification elements to make task management fun.</li>
+            </ul>
+
+            <!-- Task Management Form -->
+            <div class="card mt-5">
+                <div class="card-header">Add a Task</div>
+                <div class="card-body">
+                    <form id="taskForm">
+                        <div class="form-group">
+                            <label for="taskName">Task Name</label>
+                            <input type="text" class="form-control" id="taskName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="taskDeadline">Deadline</label>
+                            <input type="date" class="form-control" id="taskDeadline" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="taskTime">Time</label>
+                            <input type="time" class="form-control" id="taskTime" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="taskPriority">Priority</label>
+                            <select class="form-control" id="taskPriority">
+                                <option>High</option>
+                                <option>Medium</option>
+                                <option>Low</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="taskCategory">Category</label>
+                            <select class="form-control" id="taskCategory">
+                                <option>School</option>
+                                <option>Chores</option>
+                                <option>Extracurriculars</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="taskReminder">Reminder (minutes before)</label>
+                            <input type="number" class="form-control" id="taskReminder" placeholder="e.g., 30">
+                        </div>
+                        <div class="form-group">
+                            <label for="taskRecurring">Recurring (days)</label>
+                            <input type="number" class="form-control" id="taskRecurring" placeholder="e.g., 7">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Add Task</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Task List -->
+            <div class="container mt-5">
+                <div class="card">
+                    <div class="card-header">Task List</div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover" id="taskTable">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Task</th>
+                                        <th scope="col">Deadline</th>
+                                        <th scope="col">Time</th>
+                                        <th scope="col">Priority</th>
+                                        <th scope="col">Category</th>
+                                        <th scope="col">Reminder</th>
+                                        <th scope="col">Recurring</th>
+                                        <th scope="col">Progress</th>
+                                        <th scope="col">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Tasks will be dynamically added here -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <center>
+        <footer class="text-center bg-black text-white py-3 mt-5">
+            <b>&copy; 2024 Coding Club Bandaranayake College Gampaha</b>
+        </footer>
+    </center>
+
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Custom JS -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const taskForm = document.getElementById('taskForm');
+            const taskTable = document.getElementById('taskTable').getElementsByTagName('tbody')[0];
+            let tasks = [];
+
+            taskForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const taskName = document.getElementById('taskName').value;
+                const taskDeadline = document.getElementById('taskDeadline').value;
+                const taskTime = document.getElementById('taskTime').value;
+                const taskPriority = document.getElementById('taskPriority').value;
+                const taskCategory = document.getElementById('taskCategory').value;
+                const taskReminder = document.getElementById('taskReminder').value;
+                const taskRecurring = document.getElementById('taskRecurring').value;
+
+                const task = {
+                    id: Date.now(),
+                    name: taskName,
+                    deadline: taskDeadline,
+                    time: taskTime,
+                    priority: taskPriority,
+                    category: taskCategory,
+                    reminder: taskReminder,
+                    recurring: taskRecurring,
+                    completed: false
+                };
+
+                tasks.push(task);
+                addTaskToTable(task);
+                taskForm.reset();
+            });
+
+            function addTaskToTable(task) {
+                const row = taskTable.insertRow();
+                row.setAttribute('data-id', task.id);
+
+                row.insertCell(0).innerText = task.name;
+                row.insertCell(1).innerText = task.deadline;
+                row.insertCell(2).innerText = task.time;
+                row.insertCell(3).innerText = task.priority;
+                row.insertCell(4).innerText = task.category;
+                row.insertCell(5).innerText = task.reminder ? `${task.reminder} mins` : 'None';
+                row.insertCell(6).innerText = task.recurring ? `${task.recurring} days` : 'None';
+
+                const progressCell = row.insertCell(7);
+                const progressBar = document.createElement('div');
+                progressBar.className = 'progress';
+                const progress = document.createElement('div');
+                progress.className = 'progress-bar';
+                progress.style.width = task.completed ? '100%' : '0%';
+                progress.innerText = task.completed ? 'Completed' : '0%';
+                progressBar.appendChild(progress);
+                progressCell.appendChild(progressBar);
+
+                const actionsCell = row.insertCell(8);
+                const editButton = document.createElement('button');
+                editButton.className = 'btn btn-warning btn-sm mr-2';
+                editButton.innerText = 'Edit';
+                editButton.onclick = function() {
+                    editTask(task.id);
+                };
+                const deleteButton = document.createElement('button');
+                deleteButton.className = 'btn btn-danger btn-sm';
+                deleteButton.innerText = 'Delete';
+                deleteButton.onclick = function() {
+                    deleteTask(task.id);
+                };
+                actionsCell.appendChild(editButton);
+                actionsCell.appendChild(deleteButton);
+            }
+
+            function editTask(id) {
+                const task = tasks.find(t => t.id === id);
+                if (task) {
+                    document.getElementById('taskName').value = task.name;
+                    document.getElementById('taskDeadline').value = task.deadline;
+                    document.getElementById('taskTime').value = task.time;
+                    document.getElementById('taskPriority').value = task.priority;
+                    document.getElementById('taskCategory').value = task.category;
+                    document.getElementById('taskReminder').value = task.reminder;
+                    document.getElementById('taskRecurring').value = task.recurring;
+                    deleteTask(id);
+                }
+            }
+
+            function deleteTask(id) {
+                tasks = tasks.filter(t => t.id !== id);
+                const row = taskTable.querySelector(`[data-id='${id}']`);
+                if (row) {
+                    row.remove();
+                }
+            }
+        });
+    </script>
+</body>
+</html>

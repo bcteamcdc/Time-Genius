@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time Genius - Weekly Schedular</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Font Awesome CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Animation for the navbar brand */
+        .navbar-brand {
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        /* Animation for the navbar links */
+        .navbar-nav .nav-link {
+            transition: color 0.3s ease-in-out, transform 0.3s ease-in-out;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: #ffcc00; /* Change to your preferred hover color */
+            transform: scale(1.1);
+        }
+        .navbar.bg-black {
+            background-color: #000000;
+        }
+
+        .navbar .nav-link,
+        .navbar .navbar-brand {
+            color: #FFFFFF !important;
+        }
+        .bg-black {
+            background-color: #000000 !important;
+        }
+
+        .text-white {
+            color: #FFFFFF !important;
+        }
+
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-black fixed-top">
+    <a class="navbar-brand" href="index.html">
+        <img src="logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+        <b>TIME GENIUS</b>
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="index.html"><i class="fas fa-home"></i> Home </a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="about.html"><i class="fas fa-info-circle"></i> About </a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="main2.html"><i class="far fa-calendar-check"></i> Daily Scheduler </a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="main.html"><i class="fas fa-calendar-alt"></i> Weekly Scheduler </a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="task_management.html"><i class="fas fa-tasks"></i> Task Scheduler </a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="regandlog.html"><i class="fas fa-user"></i> Sign in / Sign up </a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<!-- Custom JS -->
+<div class="container">
+    <h1 style="font-family:Roboto Condensed"><br>Weekly Management App for Kids</h1>
+    <center>
+        <p>This software was created by the coding club association of Gampaha Bandaranayake College, its narrow purpose is a time management software to allocate time for their educational work with the new world.</p>
+        <h3><b>Priority (1-10) Explanation</b></h3>
+        <p>You can give 5 to 10 transits to the subject you want to prioritize and schedule more time for it.</p>
+        <p>You can study less and give a lower priority to the subject, that is between 1 and 5 and schedule the time according to the number you have given.</p>
+        <h2>Input Your Data And Schedule Your Time</h2><br>
+        <button id="fill-random">Fill As Random</button>
+        <button id="reset-form">Reset</button>
+        <br><br>
+    </center>
+    <form id="schedule-form">
+        <h3>Step 1: Add Your Free Days and Hours</h3>
+        <div id="free-days-container">
+            <div class="free-day-entry">
+                <label for="day-0">Day:</label>
+                <select id="day-0" name="day">
+                    <option value="Monday">Monday</option>
+                    <option value="Tuesday">Tuesday</option>
+                    <option value="Wednesday">Wednesday</option>
+                    <option value="Thursday">Thursday</option>
+                    <option value="Friday">Friday</option>
+                    <option value="Saturday">Saturday</option>
+                    <option value="Sunday">Sunday</option>
+                </select>
+                <label for="hours-0">Free Hours:</label>
+                <input class="input" placeholder="Type Free Hours here...." type="number" id="hours-0" name="hours" min="0" max="24" required>
+                <button type="button" class="remove-free-day">Remove</button>
+            </div>
+        </div>
+        <button type="button" id="add-free-day">Add New Free Day</button>
+        <br>
+
+        <h3>Step 2: Add Your Subjects and Priorities</h3>
+        <div id="subjects-container">
+            <div class="subject-entry">
+                <label for="subject-0">Subject:</label>
+                <input class="input" placeholder="Type Subject here...." type="text" id="subject-0" name="subject" required>
+                <label for="priority-0">Priority (1-10):</label>
+                <input class="input" placeholder="Type Priority(1-10) here...." type="number" id="priority-0" name="priority" min="1" max="10" required>
+                <button type="button" class="remove-subject">Remove</button>
+            </div>
+        </div>
+        <button type="button" id="add-subject">Add New Subject</button>
+        <br>
+
+        <button type="submit">Generate Schedule</button>
+    <div id="error-message" class="error-message">
+        Error: The total scheduled time exceeds the available free time. Please increase the free time or reduce the number of subjects.
+    </div>
+
+        <br><br><center><h1 style="font-family:Roboto Condensed"> Your Weekly Schedular </h2></center>
+    </form>
+    <table id="schedule-table" class="styled-table">
+        <thead>
+            <tr>
+                <th>Day</th>
+                <th>Subject</th>
+                <th>Time</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+    <center>
+        <button id="download-schedule" style="display:none;">Download Schedule as Image</button>
+    </center>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<script src="app.js"></script>
+<br><br>
+<footer class="text-center bg-black text-white py-3 mt-5">
+    <b>&copy; 2024 Coding Club Bandaranayake College Gampaha</b>
+</footer>
+</body>
+</html>

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time Genius - Daily Scheduler</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Font Awesome CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        .navbar.bg-black {
+            background-color: #000000;
+        }
+
+        .navbar .nav-link,
+        .navbar .navbar-brand {
+            color: #FFFFFF !important;
+        }
+
+        .bg-black {
+            background-color: #000000 !important;
+        }
+
+        .text-white {
+            color: #FFFFFF !important;
+        }
+
+        .navbar-brand {
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        .navbar-nav .nav-link {
+            transition: color 0.3s ease-in-out, transform 0.3s ease-in-out;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: #ffcc00;
+            transform: scale(1.1);
+        }
+
+        .error-message {
+            display: none;
+            color: white;
+            background-color: red;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 5px;
+            text-align: center;
+        }
+        
+        .styled-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            font-size: 0.9em;
+            font-family: 'Roboto', sans-serif;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .styled-table thead tr {
+            background-color: #009879;
+            color: #ffffff;
+            text-align: left;
+        }
+
+        .styled-table th,
+        .styled-table td {
+            padding: 12px 15px;
+        }
+
+        .styled-table tbody tr {
+            border-bottom: 1px solid #dddddd;
+        }
+
+        .styled-table tbody tr:nth-of-type(even) {
+            background-color: #f3f3f3;
+        }
+
+        .styled-table tbody tr:last-of-type {
+            border-bottom: 2px solid #009879;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-black fixed-top">
+        <a class="navbar-brand" href="index.html">
+            <img src="logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+            <b>TIME GENIUS</b>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="index.html"><i class="fas fa-home"></i> Home </a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="about.html"><i class="fas fa-info-circle"></i> About </a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="main2.html"><i class="far fa-calendar-check"></i> Daily Scheduler </a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="main.html"><i class="fas fa-calendar-alt"></i> Weekly Scheduler </a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="task_management.html"><i class="fas fa-tasks"></i> Task Scheduler </a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="regandlog.html"><i class="fas fa-user"></i> Sign in / Sign up </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="container mt-5 pt-5">
+        <h1 class="text-center">Daily Management App for Kids</h1>
+        <center>
+            <p>This software was created by the coding club association of Gampaha Bandaranayake College. Its purpose is to manage time effectively for educational tasks.</p>
+            <h3><b>Priority (1-10) Explanation</b></h3>
+            <p>Assign priorities from 5 to 10 for high-priority subjects to schedule more time for them.</p>
+            <p>Assign priorities from 1 to 5 for lower-priority subjects to schedule less time accordingly.</p>
+            <h2>Input Your Data And Schedule Your Time</h2><br>
+            <button id="fill-random" class="btn btn-primary">Fill As Random</button>
+            <button id="reset-form" class="btn btn-secondary">Reset</button>
+            <br><br>
+        </center>
+        <form id="schedule-form">
+            <h3>Step 1: Add Your Free Days and Hours</h3>
+            <div id="free-days-container">
+                <div class="free-day-entry">
+                    <label for="day-0">Day:</label>
+                    <select id="day-0" name="day">
+                        <option value="Monday">Monday</option>
+                        <option value="Tuesday">Tuesday</option>
+                        <option value="Wednesday">Wednesday</option>
+                        <option value="Thursday">Thursday</option>
+                        <option value="Friday">Friday</option>
+                        <option value="Saturday">Saturday</option>
+                        <option value="Sunday">Sunday</option>
+                    </select>
+                    <label for="hours-0">Free Hours:</label>
+                    <input class="input" placeholder="Type Free Hours here...." type="number" id="hours-0" name="hours" min="0" max="24" required>
+                </div>
+            </div>
+            <br>
+            <h3>Step 2: Add Your Subjects and Priorities</h3>
+            <div id="subjects-container">
+                <div class="subject-entry">
+                    <label for="subject-0">Subject:</label>
+                    <input class="input" placeholder="Type Subject here...." type="text" id="subject-0" name="subject" required>
+                    <label for="priority-0">Priority (1-10):</label>
+                    <input class="input" placeholder="Type Priority(1-10) here...." type="number" id="priority-0" name="priority" min="1" max="10" required>
+                    <button type="button" class="btn btn-danger remove-subject">Remove</button>
+                </div>
+            </div>
+            <button type="button" id="add-subject" class="btn btn-success">Add New Subject</button>
+
+            <button type="submit" class="btn btn-primary">Generate Schedule</button>
+            <div id="error-message" class="error-message">
+                Error: The total scheduled time exceeds the available free time. Please increase the free time or reduce the number of subjects.
+            </div>
+            <br><br>
+            <center><h1 style="font-family: 'Kanit', sans-serif;">Your Daily Scheduler</h1></center>
+        </form>
+        <table id="schedule-table" class="styled-table">
+            <thead>
+                <tr>
+                    <th>Day</th>
+                    <th>Subject</th>
+                    <th>Time</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+        <center>
+            <button id="download-schedule" class="btn btn-primary" style="display:none;">Download Schedule as Image</button>
+        </center>
+    </div>
+    
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+    <script src="app2.js"></script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+vishwamihi22
+lEhQe1J566HMBSWI
+mongodb+srv://vishwamihi22:lEhQe1J566HMBSWI@cluster0.7tfnvps.mongodb.net/?appName=Cluster0
+mongodb+srv://vishwamihi22:lEhQe1J566HMBSWI@cluster0.7tfnvps.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+
+Configure Build and Deploy Settings:
+Set the build command to npm install.
+Set the start command to node server.js.
+
+Set Environment Variables: Add the MongoDB connection string as an environment variable:
+Key: MONGODB_URI
+Value: your_mongodb_atlas_uri
+
+https://electric-bernardina-vishwa223-722ebb55.koyeb.app/

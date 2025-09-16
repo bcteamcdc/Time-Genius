@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time Genius - TIMER</title>
+    <link rel="stylesheet" href="time.css">
+    <script src="timer.js" defer></script>
+    <!-- Font Awesome CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        .navbar.bg-black {
+            background-color: #000000;
+        }
+
+        .navbar .nav-link,
+        .navbar .navbar-brand {
+            color: #FFFFFF !important;
+        }
+
+        .bg-black {
+            background-color: #000000 !important;
+        }
+
+        .text-white {
+            color: #FFFFFF !important;
+        }
+
+        .container {
+            margin-top: 100px;
+            text-align: center;
+        }
+
+        #timer-display {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .buttons button {
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-black fixed-top">
+        <a class="navbar-brand" href="index.html">
+            <img src="logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+            <b>TIME GENIUS</b>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="index.html"><i class="fas fa-home"></i> Home </a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="about.html"><i class="fas fa-info-circle"></i> About </a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="main2.html"><i class="far fa-calendar-check"></i> Daily Scheduler </a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="main.html"><i class="fas fa-calendar-alt"></i> Weekly Scheduler </a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="task_management.html"><i class="fas fa-tasks"></i> Task Scheduler </a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="regandlog.html"><i class="fas fa-user"></i> Sign in / Sign up </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1>TASK TIMER</h1>
+        <p id="timer-display">00:00:00</p>
+        <div class="buttons">
+            <button id="start-timer" class="btn btn-primary">Start</button>
+            <button id="pause-timer" class="btn btn-warning">Pause</button>
+            <button id="reset-timer" class="btn btn-danger">Reset</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            const hours = parseInt(urlParams.get('hours'), 10) || 0;
+            const minutes = parseInt(urlParams.get('minutes'), 10) || 0;
+            let totalSeconds = (hours * 60 + minutes) * 60;
+            let interval;
+            let isPaused = false;
+
+            const timerDisplay = document.getElementById('timer-display');
+            const startButton = document.getElementById('start-timer');
+            const pauseButton = document.getElementById('pause-timer');
+            const resetButton = document.getElementById('reset-timer');
+
+            function updateTimerDisplay() {
+                const displayHours = Math.floor(totalSeconds / 3600);
+                const displayMinutes = Math.floor((totalSeconds % 3600) / 60);
+                const displaySeconds = totalSeconds % 60;
+                timerDisplay.textContent = `${String(displayHours).padStart(2, '0')}:${String(displayMinutes).padStart(2, '0')}:${String(displaySeconds).padStart(2, '0')}`;
+            }
+
+            function startTimer() {
+                if (interval) clearInterval(interval);
+                isPaused = false;
+                interval = setInterval(() => {
+                    if (!isPaused && totalSeconds > 0) {
+                        totalSeconds--;
+                        updateTimerDisplay();
+                    } else if (totalSeconds === 0) {
+                        clearInterval(interval);
+                        alert('Your Learning Time Is End');
+                        playTone();
+                    }
+                }, 1000);
+            }
+
+            function pauseTimer() {
+                isPaused = !isPaused;
+                pauseButton.textContent = isPaused ? 'Resume' : 'Pause';
+            }
+
+            function resetTimer() {
+                const confirmReset = confirm('Are you sure you want to reset the timer?');
+                if (confirmReset) {
+                    if (interval) clearInterval(interval);
+                    totalSeconds = (hours * 60 + minutes) * 60;
+                    updateTimerDisplay();
+                    isPaused = false;
+                    pauseButton.textContent = 'Pause';
+                }
+            }
+
+            function playTone() {
+                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                const oscillator = audioContext.createOscillator();
+                oscillator.type = 'sine';
+                oscillator.frequency.setValueAtTime(440, audioContext.currentTime);
+                oscillator.connect(audioContext.destination);
+                oscillator.start();
+                setTimeout(() => {
+                    oscillator.stop();
+                    audioContext.close();
+                }, 2000);
+            }
+
+            startButton.addEventListener('click', startTimer);
+            pauseButton.addEventListener('click', pauseTimer);
+            resetButton.addEventListener('click', resetTimer);
+
+            updateTimerDisplay();
+        });
+    </script>
+</body>
+</html>
